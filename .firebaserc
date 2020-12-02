@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "justpreppin",
+    "production": "goodpace-ai"
+  }
+}

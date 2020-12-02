@@ -1,0 +1,419 @@
+body {
+  display:flex;
+  flex-direction: column;
+  font-family: 'Roboto', 'Nunito', 'Arial', sans-serif;
+  height: 100%;  
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 30px 60px;
+  border-left: 1px solid #f2f2f2;
+  height: 100vh;
+}
+
+h1, h2, h3 {
+  padding-top: 20px;
+}
+
+button, input, textarea {
+  font-family: 'Roboto', 'Nunito', 'Arial', sans-serif;
+}
+
+main {
+  padding: 40px 0 100px;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  height: 2px;
+  background-color: #f2f2f2;
+  border: none;
+  margin: 32px 0;
+}
+
+footer {
+  position: relative;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;    
+}
+
+ul.pathList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display:flex;
+  flex-direction: column;
+  position: relative;
+}
+ul.pathList li.pathItem:hover {
+  border: 1px solid #c1c1c1;
+  cursor: pointer;
+}
+ul.pathList li.pathItem {
+  border: 1px solid white;
+  padding: 3px 0;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+li.pathItem img.avatar {
+  width: 36px;
+  margin-top:22px;
+}
+li.pathItem div {
+  flex: -1;  
+}
+li.pathItem a {
+  color: #596869;
+}
+li.pathItem .last {
+  flex: 4;
+}
+li.pathItem a {
+  margin-right: 22px;
+}
+li.pathItem span.title {
+  font-size: 130%;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.wrapper {
+  cursor: pointer; /*context-menu;*/
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  width: 100%;
+}
+
+.paceNavContainer {
+  width: 100%;
+  max-width: 680px;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.prevQuestion {
+  flex: -1
+}
+
+.nextQuestion {
+  flex: 0 1 auto;
+}
+
+.profileHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profileParticulars {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  margin-top: 12px;
+}
+
+.profileParticulars div {
+  flex: 0 1 auto;
+  
+}
+/* https://jsfiddle.net/jCUNm/ */
+
+.profileParticulars:hover img {
+  opacity: .15;
+  cursor: pointer;
+}
+
+.profileParticulars:hover .profileName {
+  cursor: pointer;
+}
+
+.profileParticulars:hover .profileText {
+  cursor: pointer;
+}
+
+.profileImage {
+  height: 120px;
+}
+
+.profileImageCover {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 132px;
+  height: 132px;
+  margin-top: 50px;
+  display: none;
+}
+.profileImageCover a {
+  font-size: 120%;
+}
+.profileParticulars:hover .profileImageCover {
+  display: inline;
+}
+
+.profileName {
+  font-weight: 480;
+  padding: 20px 8px;
+  font-size: 18px;
+  background-color: white;
+}
+
+.profileText {
+  padding: 10px 8px;
+}
+
+.profileParticulars .profileName:hover, 
+.profileParticulars .profileText:hover {
+  background-color: #f2f2f2;
+}
+
+
+.profileSocial {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profileSocial span {
+  flex: 0 1 auto;
+}
+
+.profileSectionHead {
+  padding-top: 24px;
+  font-size: 86%;
+  text-transform: uppercase;
+  color: #a1a1a1;
+}
+
+.isYou {
+  color: #a1a1a1;
+  font-size: 80%;
+  position: absolute;
+  bottom: -14px;
+  left: 4px;
+}
+
+/* build-path */
+.instructionTip {
+  position: relative;
+  width: 100%;
+}
+.hideTipBtn {
+  width: 18px;
+  color: #cdcdcd;
+  position: absolute;
+  top: 10px;
+  right: -14px;
+  cursor: pointer;
+}
+
+
+/* create-path, take-path */
+.getStarted {
+  display: none;
+}
+.progressiveLink {
+  color: #2388BC;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 30px 0;
+  padding: 10px 20px;
+  border: 3px solid #2388BC;
+}
+.progressiveLink:hover {
+  background-color: #2388BC;
+  color: white;
+}
+.authorProfileUrl {
+  color: #2388BC;
+  cursor: pointer;
+  font-weight: bold;
+}
+.goalText {
+  color: #636363;
+  font-weight: bold;
+}
+.pullQuote {
+  color: #636363;
+  max-width: 680px;
+  width: 93%;
+  margin: 0;
+  padding: 10px 30px;
+  border-left: 2px dotted #c1c1c1;
+  line-height: 22px;
+}
+.buildPathUrl {
+  color: #2388BC;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 3px solid #2388BC;
+  font-size: larger;
+}
+.buildPathUrl:hover {
+  background-color: #2388BC;
+  color: white;
+}
+.pathHeading {
+  padding-top: 12px;
+}
+.instruction {
+  font-weight: bold;
+}
+.lightSubhead {
+  color: #515751;
+  font-weight: 200;
+}
+.paceLabel {
+  color: #a1a1a1;
+  padding-left: 12px;
+}
+.tag {
+  color: #a1a1a1;
+}
+.actionHeader {
+  margin-top: 32px;
+  font-family: 'Roboto', 'Nunito', 'Arial', sans-serif;
+  font-weight: 200;
+}
+.instructionHolder, .responseHolder, .actionHolder {
+  position: relative;
+  padding-left: 12px;
+}
+.instructionHolder h2, .responseHolder h2, .actionHolder h2 {
+  margin-top:50px;
+}
+.previousInstruction {
+  color: #636363;
+  padding-top: 30px;
+  padding-left: 12px;
+}
+.dot {
+  position: absolute;
+  top: 0;
+  left: -43px;
+  height: 25px;
+  width: 25px;
+  border-radius: 12%;
+  display: inline-block;
+}
+.instructionHolder .dot {
+  background-color:#C4C6E7;
+}
+.responseHolder .dot {
+  background-color:#CEB3AB;
+}
+.actionHolder .dot {
+  background-color: #466365;
+}
+.paceContent {
+  background-color: #f2f2f2;
+  padding: 12px 20px;
+  width: 97%;
+}
+.responseInputHolder {
+  position: relative;
+}
+.timestamp {
+  position: absolute;
+  bottom: 12px;
+  right: -14px;
+  color: #a1a1a1;
+  font-size: small;
+  font-weight: 500;
+}
+.actionHolder {
+  position: relative;
+}
+
+
+/* tool-tips.css */
+[data-md-tooltip] {
+  position: relative;
+}
+[data-md-tooltip]:before {
+    content: attr(data-md-tooltip);
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    padding: 8px;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: top;
+    background: #616161e6;
+    color: white;
+    border-radius: 2px;
+    font-size: 12px;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+}
+[data-md-tooltip]:hover:before {
+  transform: translateX(-50%) scale(1); 
+}
+[data-md-tooltip].md-tooltip--right:before {
+  left: auto;
+  right: -10px;
+  bottom: auto;
+  top: 50%;
+  transform: translate(100%, -50%) scale(0);
+  transform-origin: left center;
+}
+[data-md-tooltip].md-tooltip--right:hover:before {
+  transform: translate(100%, -50%) scale(1);
+}
+[data-md-tooltip].md-tooltip--left:before {
+  left: -15px;
+  right: auto;
+  bottom: auto;
+  top: 50%;
+  transform: translate(-100%, -50%) scale(0);
+  transform-origin: right center;
+}
+[data-md-tooltip].md-tooltip--left:hover:before {
+  transform: translate(-100%, -50%) scale(1);
+}
+.md-tooltip--top:before {
+  top: -35px;
+  bottom: auto;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom center; 
+} 
+
+/* feedback */
+.feedback {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  color: #c1c1c1;
+}
+.thanks {
+  font-size: 18px;
+  font-weight: bold;
+  display: none;
+}
+.closeBtn {
+  margin-top: 20px;
+  display: none;
+}
