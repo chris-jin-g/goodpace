@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-import moment from 'moment'
-import { useUser } from '../utils/auth/useUser'
-import { capitalize } from '../utils/common/index'
-
-import { getWithFilter, populateChild } from '../utils/data/firestore'
-import { IndexHeading } from '../components/Intro'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+import moment from "moment";
+import { useUser } from "../utils/auth/useUser";
+import { capitalize } from "../utils/common/index";
+import { IndexHeading } from "../components/Intro";
+import { getWithFilter, populateChild } from "../utils/data/firestore";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 // import signInAnonymously from '../utils/auth/authAnonymous'
 // const fetcherUno = (url, token) =>
@@ -19,97 +18,120 @@ import { Footer } from '../components/Footer'
 //     credentials: 'same-origin',
 //   }).then((res) => res.json())
 
-
 export default function Home() {
   // Dashboard can use: https://swr.vercel.app/docs/global-configuration
-  
-  const { user, logout } = useUser()
-  const router = useRouter()
 
-  const [pathsBuilding, setPathsBuilding] = useState()
-  const [pathsTaking, setPathsTaking] = useState()
+  const { user, logout } = useUser();
+  const router = useRouter();
+
+  const [pathsBuilding, setPathsBuilding] = useState();
+  const [pathsTaking, setPathsTaking] = useState();
   // const { data, error } = useSWR(
   //   user ? ['/api/getFood', user.token] : null,
   //   fetcherUno
   // )
-  
+
   useEffect(() => {
     async function getPathsBuilding() {
-      let paths = await getWithFilter('paths', [], [{ fieldPath: 'createdAt', direction: 'desc' }], 5)
+      let paths = await getWithFilter(
+        "paths",
+        [],
+        [{ fieldPath: "createdAt", direction: "desc" }],
+        5
+      );
       const pathsBuilding = await Promise.all(
-        paths.map(async(p) => {
-          p.author = await populateChild(p, 'author', 'users', ['id', 'displayName', 'avatarSource']) 
-          return p
+        paths.map(async p => {
+          p.author = await populateChild(p, "author", "users", [
+            "id",
+            "displayName",
+            "avatarSource"
+          ]);
+          return p;
         })
-      )
-      setPathsBuilding(pathsBuilding)
+      );
+      setPathsBuilding(pathsBuilding);
     }
 
     async function getPathsTaking() {
-      let paths = await getWithFilter('paths:taken', [], [{ fieldPath: 'createdAt', direction: 'desc' }], 5)
+      let paths = await getWithFilter(
+        "paths:taken",
+        [],
+        [{ fieldPath: "createdAt", direction: "desc" }],
+        5
+      );
       const pathsTaking = await Promise.all(
-        paths.map(async(p) => {
-          p.taker = await populateChild(p, 'taker', 'users', ['id', 'displayName', 'avatarSource']) 
-          return p
+        paths.map(async p => {
+          p.taker = await populateChild(p, "taker", "users", [
+            "id",
+            "displayName",
+            "avatarSource"
+          ]);
+          return p;
         })
-      )
-      setPathsTaking(pathsTaking)
+      );
+      setPathsTaking(pathsTaking);
     }
-    
-    getPathsBuilding()
-    getPathsTaking()
 
-    console.log('you are', user)
-  }, [])
+    getPathsBuilding();
+    getPathsTaking();
+
+    console.log("you are", user);
+  }, []);
 
   return (
-    
     <div className="container">
-      
       <Header title="Pace" />
 
       <main>
-        <IndexHeading 
+        <IndexHeading
           text="Welcome to Pace"
           me={user && user.id}
           myAvatar={user && user.avatarSource}
-          onClickMe={(e) => { 
-            e.preventDefault()
-            console.log('go to my profile of', user.id) 
-            router.push(`/profile/${user.id}`)
+          onClickMe={e => {
+            e.preventDefault();
+            console.log("go to my profile of", user.id);
+            router.push(`/profile/${user.id}`);
           }}
         />
 
-        <h2 className="title">
-          Our Mission
-        </h2>
-        <p>To level up how humans make progress by signaling clear paths toward goals they care for.</p>
-        
+        <h2 className="title">Our Mission</h2>
+        <p>
+          To level up how humans make progress by signaling clear paths toward
+          goals they care for.
+        </p>
+
         <div>
           <h3>Explore paths by the community</h3>
-          
+
           <ul className="pathList">
-            { pathsBuilding && pathsBuilding.length && pathsBuilding.map(p => {
-              return (
-                <li key={p.id} className="pathItem">
-                  <Link href={`/profile/${p.author.id}`}>
-                    <a>
-                      <div>
-                        <img className='avatar' src={p.author.avatarSource} />
-                      </div>&nbsp;
-                    </a>
-                  </Link>
-                  <Link href={`/take-path/${p.id}/raise-funds-for-a-startup`}>                    
-                    <a className='last'>
-                      <div className='last'>
-                        <span className='title'>{ capitalize(p['goal:name']) }</span><br/>
-                        By: {p.author.displayName},&nbsp; Created: { moment(p.createdAt).fromNow() }
-                      </div>
-                    </a>
-                  </Link>
-                </li>
-              )
-            })}
+            {pathsBuilding &&
+              pathsBuilding.length &&
+              pathsBuilding.map(p => {
+                return (
+                  <li key={p.id} className="pathItem">
+                    <Link href={`/profile/${p.author.id}`}>
+                      <a>
+                        <div>
+                          <img className="avatar" src={p.author.avatarSource} />
+                        </div>
+                        &nbsp;
+                      </a>
+                    </Link>
+                    <Link href={`/take-path/${p.id}/raise-funds-for-a-startup`}>
+                      <a className="last">
+                        <div className="last">
+                          <span className="title">
+                            {capitalize(p["goal:name"])}
+                          </span>
+                          <br />
+                          By: {p.author.displayName},&nbsp; Created:{" "}
+                          {moment(p.createdAt).fromNow()}
+                        </div>
+                      </a>
+                    </Link>
+                  </li>
+                );
+              })}
           </ul>
         </div>
 
@@ -117,28 +139,28 @@ export default function Home() {
           <h3>Make your own path toward these goals</h3>
           <ul className="pathList">
             <li className="pathItem">
-              <Link href={'/create-path/JyKThZBwes6mFClGi9J3/raise-funds-for-a-startup'}>
-                <a className='last'>
-                  <div className='last'>
-                    <span className="title">How to raise funds for a startup</span>
+              <Link
+                href={
+                  "/create-path/JyKThZBwes6mFClGi9J3/raise-funds-for-a-startup"
+                }
+              >
+                <a className="last">
+                  <div className="last">
+                    <span className="title">
+                      How to raise funds for a startup
+                    </span>
                   </div>
                 </a>
               </Link>
             </li>
           </ul>
         </div>
-        
       </main>
-      
+
       <Footer user={user} />
-
     </div>
-
-  )
-  
+  );
 }
-
-
 
 // import { fetcher } from '../utils/data/fetcher'
 
@@ -173,7 +195,7 @@ export default function Home() {
 
 // const useBootstrap = () => {
 //   const { data, error } = useSWR('/api/bootstrap', fetcher)
-  
+
 //   return {
 //     bootstrap: data,
 //     isLoading: !error && !data,
